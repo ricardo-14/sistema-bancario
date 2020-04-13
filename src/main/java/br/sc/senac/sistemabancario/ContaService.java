@@ -111,4 +111,14 @@ public class ContaService {
 		contas.get(numeroContaOrigem).transferirPara(ContaDestino, valor);
 		return valor;
 	}
+
+	@PatchMapping("/extrato/{numeroconta}")
+	public ContaDTO imprimirExtrato(@PathVariable int numeroconta) {
+		if (numeroconta <= -1 || numeroconta > contas.size()) {
+			ContaDTO conta = new ContaDTO("", 0.0, "");
+			return conta;
+		}
+		ContaDTO conta = contas.get(numeroconta);
+		return conta;
+	}
 }
